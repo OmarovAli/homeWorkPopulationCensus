@@ -7,7 +7,7 @@ public class Main {
         List<String> names = Arrays.asList("Jack", "Connor", "Harry", "George", "Samuel", "John");
         List<String> families = Arrays.asList("Evans", "Young", "Harris", "Wilson", "Davies", "Adamson", "Brown");
         Collection<Person> persons = new ArrayList<>();
-        for (int i = 0; i < 10_000_000; i++) {
+        for (int i = 0; i < 10_000; i++) {
             persons.add(new Person(
                     names.get(new Random().nextInt(names.size())),
                     families.get(new Random().nextInt(families.size())),
@@ -21,14 +21,29 @@ public class Main {
                 .count();
         System.out.println(count + " несовершеннолетних");
         List<String> stream = persons.stream()
-                .filter(x -> x.getAge() > 18)
-                .filter(x -> x.getAge() < 27)
-                .map(Person::toString)
-                .collect(Collectors.toList());
-        System.out.println( + " призывников");
-        Stream<Person> stream1 = persons.stream()
+                .filter(person -> person.getAge() > 18)
+                .filter(person -> person.getAge() < 27)
+                        .map(person -> person.getFamily())
+                                .collect(Collectors.toList());
+
+        System.out.println(stream);
+        List<String> stream1 = persons.stream()
                 .filter(x -> x.getAge() > 18)
                 .filter(x -> x.getAge() < 65)
+                .filter(person -> person.getSex() == Sex.MAN)
+                .filter(x -> x.getEducation() == Education.HIGHER)
+                .filter(x -> x.getAge() > 18)
+                .filter(x -> x.getAge() < 60)
+                .filter(person -> person.getSex() == Sex.MAN)
+                .filter(x -> x.getEducation() == Education.HIGHER)
+                .map(person -> person.getFamily())
+                        .collect(Collectors.toList());
+        System.out.println(stream1);
+
+
+
+
+
     }
 }
 class Person {
@@ -37,6 +52,10 @@ class Person {
     private Integer age;
     private Sex sex;
     private Education education;
+
+    public void setFamily(String family) {
+        this.family = family;
+    }
 
     public Person(String name, String family, int age, Sex sex, Education education) {
         this.name = name;
