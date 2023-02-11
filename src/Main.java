@@ -15,84 +15,36 @@ public class Main {
                     Sex.values()[new Random().nextInt(Sex.values().length)],
                     Education.values()[new Random().nextInt(Education.values().length)]));
 
-            }
+        }
         long count = persons.stream()
                 .filter(x -> x.getAge() < 18)
                 .count();
         System.out.println(count + " несовершеннолетних");
         List<String> stream = persons.stream()
-                .filter(person -> person.getAge() > 18)
-                .filter(person -> person.getAge() < 27)
-                        .map(person -> person.getFamily())
-                                .collect(Collectors.toList());
+                .filter(person -> person.getAge() > 18 && person.getAge() < 27)
+                .map(person -> person.getFamily())
+                .collect(Collectors.toList());
 
-        System.out.println(stream);
+        System.out.println("Призывники " + stream);
         List<String> stream1 = persons.stream()
-                .filter(x -> x.getAge() > 18)
-                .filter(x -> x.getAge() < 65)
-                .filter(person -> person.getSex() == Sex.MAN)
-                .filter(x -> x.getEducation() == Education.HIGHER)
-                .filter(x -> x.getAge() > 18)
-                .filter(x -> x.getAge() < 60)
-                .filter(person -> person.getSex() == Sex.MAN)
+                .filter(x -> x.getAge() > 18 && x.getAge() < 60 || x.getAge() < 65)
                 .filter(x -> x.getEducation() == Education.HIGHER)
                 .map(person -> person.getFamily())
-                        .collect(Collectors.toList());
-        System.out.println(stream1);
+                .collect(Collectors.toList());
+        System.out.println("Работоспособоное население " + stream1);
 
+        /* как сделать с помощью метода sorted?
+        Подскажите пожалуйста
+         */
 
+         // List<String> stream2 = persons.stream()
+        //        .filter(x -> x.getAge() > 18)
+         //       .filter(x -> x.getAge() < 60)
+        //        .filter(person -> person.getSex() == Sex.WOMAN)
+         //       .filter(x -> x.getEducation() == Education.HIGHER)
+        //            .map(person -> person.getFamily())
+      //          .collect(Collectors.toList());
+     //   System.out.println("Работоспособоные женщины " + stream2);
 
-
-
-    }
-}
-class Person {
-    private String name;
-    private String family;
-    private Integer age;
-    private Sex sex;
-    private Education education;
-
-    public void setFamily(String family) {
-        this.family = family;
-    }
-
-    public Person(String name, String family, int age, Sex sex, Education education) {
-        this.name = name;
-        this.family = family;
-        this.age = age;
-        this.sex = sex;
-        this.education = education;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getFamily() {
-        return family;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public Sex getSex() {
-        return sex;
-    }
-
-    public Education getEducation() {
-        return education;
-    }
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", family='" + family + '\'' +
-                ", age=" + age +
-                ", sex=" + sex +
-                ", education=" + education +
-                '}';
     }
 }
