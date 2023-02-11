@@ -27,24 +27,25 @@ public class Main {
 
         System.out.println("Призывники " + stream);
         List<String> stream1 = persons.stream()
-                .filter(x -> x.getAge() > 18 && x.getAge() < 60 || x.getAge() < 65)
+                .filter(x -> x.getAge() > 18 && x.getAge() < 65)
+                .filter(x -> x.getAge() > 18 && x.getAge() < 60)
                 .filter(x -> x.getEducation() == Education.HIGHER)
                 .map(person -> person.getFamily())
                 .collect(Collectors.toList());
-        System.out.println("Работоспособоное население " + stream1);
+      System.out.println("Работоспособоное население " + stream1);
 
         /* как сделать с помощью метода sorted?
         Подскажите пожалуйста
          */
 
-         // List<String> stream2 = persons.stream()
-        //        .filter(x -> x.getAge() > 18)
-         //       .filter(x -> x.getAge() < 60)
-        //        .filter(person -> person.getSex() == Sex.WOMAN)
-         //       .filter(x -> x.getEducation() == Education.HIGHER)
-        //            .map(person -> person.getFamily())
-      //          .collect(Collectors.toList());
-     //   System.out.println("Работоспособоные женщины " + stream2);
+         /* List<String> stream2 = persons.stream()
+                .filter(x -> x.getAge() > 18)
+                .filter(x -> x.getAge() < 60)
+                .filter(person -> person.getSex() == Sex.WOMAN)
+                .filter(x -> x.getEducation() == Education.HIGHER)
+                    .map(person -> person.getFamily())
+                .collect(Collectors.toList());
+        System.out.println("Работоспособоные женщины " + stream2);*/
 
     }
 }
